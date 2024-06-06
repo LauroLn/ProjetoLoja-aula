@@ -1,0 +1,60 @@
+<%- include ('partials/header.ejs') %>
+<%- include ('partials/navbar.ejs') %>
+
+<div class="container">
+    <div class="card">
+       <div class="card-header">
+            <h1>Cadastrar cliente</h1>
+       </div>
+       <div class="card-body">
+             <form action="/clientes/new" method="POST">
+                <label>Nome do Cliente: </label>
+                <input type="text" name="nome" id="nome" placeholder="insira o nome do cliente" class="form-control" required>
+                <label>Cpf do Cliente: </label>
+                <input type="text" name="cpf" id="cpf" placeholder="insira o cpf do cliente" class="form-control" required>
+                <label>Endereco do Cliente: </label>
+                <input type="text" name="endereco" id="endereco" placeholder="insira o endereco do cliente" class="form-control" required>
+                <br>
+                <button class="btn btn-success">Cadastrar</button>
+             </form>
+       </div>
+    </div>
+  </div>
+
+<hr>
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h1>Clientes</h1>
+        </div>
+        <div class="card-body">
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Nome:</th>
+                        <th>CPF:</th>
+                        <th>Endereço:</th>
+                        <th>editar</th>
+                        <th style="text-align: center;" colspan="2">Ações:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% clientes.forEach(cliente => { %>
+                    <tr>
+                        <td><img width="30px" src="imgs/avatar.png" alt="Clientes"></td>
+                        <td><%= cliente.nome %></td>
+                        <td><%= cliente.cpf %></td>
+                        <td><%= cliente.endereco %></td>
+                        <td><a style="color:blue;" href="/clientes/edit/<%= cliente._id %>">Editar</a></td>
+                        <td><a style="color:red;" href="/clientes/delete/<%= cliente._id %>" onclick="return confirm(`Confirma a exclusão do registro?`)">Excluir</a></thd>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<%- include ('partials/footer.ejs') %>
